@@ -9,11 +9,13 @@ public class EnemyHealth : MonoBehaviour
     private void OnEnable()
     {
         currentHealth = maxHealth;
+        UpdateHealthBar();
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        UpdateHealthBar();
 
         if (currentHealth <= 0)
         {

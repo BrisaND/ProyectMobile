@@ -485,6 +485,98 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 588357180}
   m_CullTransparentMesh: 1
+--- !u!1 &823236288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 823236290}
+  - component: {fileID: 823236289}
+  m_Layer: 0
+  m_Name: PiercingBulletPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &823236289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823236288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45492c80bddcfd94f805b17634e7b528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefa: {fileID: 4830432281225268914, guid: 44cc62c13af7235489d1fdf2d7a65467, type: 3}
+  poolSize: 50
+--- !u!4 &823236290
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823236288}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5828003, y: 0.79134184, z: 0.061217573}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1011788971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1011788973}
+  - component: {fileID: 1011788972}
+  m_Layer: 0
+  m_Name: Bulletpool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1011788972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011788971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45492c80bddcfd94f805b17634e7b528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefa: {fileID: 4830432281225268914, guid: f0ceaa74de0670c4e9b11635afdf6655, type: 3}
+  poolSize: 50
+--- !u!4 &1011788973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011788971}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5828003, y: 0.79134184, z: 0.061217573}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1274760718
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,6 +762,7 @@ GameObject:
   - component: {fileID: 1401252395}
   - component: {fileID: 1401252394}
   - component: {fileID: 1401252393}
+  - component: {fileID: 1401252396}
   m_Layer: 0
   m_Name: torreta
   m_TagString: Untagged
@@ -691,6 +784,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 5
   enemyPool: {fileID: 2046262353}
+  damage: 34
+  fireRate: 1
+  bulletPool: {fileID: 1011788972}
+  hero: {fileID: 1401252396}
 --- !u!212 &1401252394
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -755,12 +852,25 @@ Transform:
   m_GameObject: {fileID: 1401252392}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.98, y: 1.95, z: 0}
+  m_LocalPosition: {x: 5.95, y: -1.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1401252396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401252392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a66ce6e715208043a3276110597cc33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  piercingPool: {fileID: 823236289}
 --- !u!1 &1643929041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,3 +1258,5 @@ SceneRoots:
   - {fileID: 1643929045}
   - {fileID: 202413867}
   - {fileID: 1401252395}
+  - {fileID: 1011788973}
+  - {fileID: 823236290}

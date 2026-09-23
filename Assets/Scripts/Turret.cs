@@ -6,16 +6,33 @@ public class Turret : MonoBehaviour
     [SerializeField] float range = 5f;
     [SerializeField] EnemyPool enemyPool;
 
+    [SerializeField] int damage = 34;
+    [SerializeField] float fireRate = 1f;
+
+    private float fireCountdown = 0f;
     Transform target;
 
+    [SerializeField] private BulletPool bulletPool;
+    [SerializeField] private HeroSwitcher hero;
     private void Update()
     {
         FindTarget();
 
+
+
         if (target != null)
         {
-            transform.LookAt(target);
+
+            if (fireCountdown <= 0)
+            {
+                Shoot();
+                fireCountdown = 1 / GetFireRate();
+            }
+
+            fireCountdown -= Time.deltaTime;
         }
+
+        
     }
 
     void FindTarget()
@@ -39,5 +56,45 @@ public class Turret : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, range);
+    }
+
+    private void Shoot()
+    {
+        Bullet bullet = GetBulletPool().getBullet(transform.position);
+
+        if (bullet != null)
+        {
+            bullet.Launch(target, GetDamage());
+        }
+    }
+
+    private float GetFireRate()
+    {
+        if (hero == null)
+        {
+            return fireRate;
+        }
+
+        return hero.ModifyFireRate(fireRate);
+    }
+
+    private int GetDamage()
+    {
+        if (hero == null)
+        {
+            return damage;
+        }
+
+        return hero.ModifyDamage(damage);
+    }
+
+    private BulletPool GetBulletPool()
+    {
+        if (hero == null)
+        {
+            return bulletPool;
+        }
+
+        return hero.ModifyBulletPool(bulletPool);
     }
 }
