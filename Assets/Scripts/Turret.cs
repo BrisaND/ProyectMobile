@@ -13,7 +13,7 @@ public class Turret : MonoBehaviour
 
     private float fireCountdown = 0f;
     private Transform target;
-
+    [SerializeField] private BulletPool bulletPool;
     private void Update()
     {
         if (target == null || !target.gameObject.activeInHierarchy || Vector2.Distance(transform.position, target.position) > range)
@@ -91,10 +91,19 @@ public class Turret : MonoBehaviour
     {
         if (hero == null)
         {
-            return BulletPool.Instance;
+            return bulletPool;
         }
 
-        return hero.ModifyBulletPool(BulletPool.Instance);
+        return hero.ModifyBulletPool(bulletPool);
+    }
+
+    public void SetHero(HeroSwitcher newHero)
+    {
+        hero = newHero;
+    }
+    public void SetBulletPool(BulletPool pool)
+    {
+        bulletPool = pool;
     }
 
     private void OnDrawGizmosSelected()

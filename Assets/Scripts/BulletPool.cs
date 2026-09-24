@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BulletPool : MonoBehaviour
 {
-    public static BulletPool Instance;
+   
 
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private int poolSize = 20;
@@ -12,15 +12,7 @@ public class BulletPool : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+      
 
         InicializarPool();
     }

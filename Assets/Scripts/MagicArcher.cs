@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class MagicArcher : HeroSwitcher
 {
+    [SerializeField] private BulletPool piercingPool;
+
     public override BulletPool ModifyBulletPool(BulletPool basePool)
     {
-        if (BulletPool.Instance != null)
+        if (piercingPool != null)
         {
-            return BulletPool.Instance;
+            return piercingPool;
         }
 
         return basePool;

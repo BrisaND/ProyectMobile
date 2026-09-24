@@ -7,7 +7,7 @@ public class AllyPlacementManager : MonoBehaviour
     [Header("Configuración")]
     [SerializeField] private GameObject turretPrefab;
     [SerializeField] private Tilemap zonasPermitidasTilemap;
-
+    [SerializeField] private BulletPool bulletPool;
     private void Update()
     {
         if (GameManager.Instance != null && GameManager.Instance.currentState != GameManager.GameState.Preparacion)
@@ -69,6 +69,7 @@ public class AllyPlacementManager : MonoBehaviour
             return;
         }
 
-        Instantiate(turretPrefab, posicion, Quaternion.identity);
+        GameObject torreta = Instantiate(turretPrefab, posicion, Quaternion.identity);
+        torreta.GetComponent<Turret>().SetBulletPool(bulletPool);
     }
 }
