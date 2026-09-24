@@ -1,4 +1,3 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PiercingBullet : Bullet
@@ -28,13 +27,17 @@ public class PiercingBullet : Bullet
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("toco " + collision.name);
-        EnemyHealth enemy = collision.GetComponent<EnemyHealth>();
+        Debug.Log("Toco " + collision.name);
 
-        if (enemy != null)
+        if (collision.TryGetComponent<EnemyHealth>(out EnemyHealth enemy))
         {
             enemy.TakeDamage(damage);
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySound(AudioManager.Instance.hitSound);
+            }
         }
     }
-   
+
 }

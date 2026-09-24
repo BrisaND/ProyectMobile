@@ -1,90 +1,89 @@
-using NUnit.Framework;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+
 public class Turret : MonoBehaviour
 {
-    [SerializeField] float range = 5f;
-    [SerializeField] EnemyPool enemyPool;
+    [Header("Atributos Base")]
+    [SerializeField] private float range = 5f;
+    [SerializeField] private int damage = 34;
+    [SerializeField] private float fireRate = 1f;
 
-    [SerializeField] int damage = 34;
-    [SerializeField] float fireRate = 1f;
+    [Header("Referencias")]
+    [SerializeField] private HeroSwitcher hero;
 
     private float fireCountdown = 0f;
-    Transform target;
+    private Transform target;
 
-    [SerializeField] private BulletPool bulletPool;
-    [SerializeField] private HeroSwitcher hero;
     private void Update()
     {
-        FindTarget();
-
-
+        if (target == null || !target.gameObject.activeInHierarchy || Vector2.Distance(transform.position, target.position) > range)
+        {
+            FindTarget();
+        }
 
         if (target != null)
         {
-
-            if (fireCountdown <= 0)
+            if (fireCountdown <= 0f)
             {
                 Shoot();
-                fireCountdown = 1 / GetFireRate();
+                fireCountdown = 1f / GetFireRate();
             }
 
             fireCountdown -= Time.deltaTime;
         }
-
-        
     }
 
-    void FindTarget()
+    private void FindTarget()
     {
-        List<GameObject> enemies = enemyPool.GetActiveEnemies();
-        float closesDistance = range;
+
+        List<GameObject> enemies = EnemyPool.Instance.GetActiveEnemies();
+
+        if (enemies.Count == 0) return;
+
+        float closestDistance = range;
         target = null;
 
         for (int i = 0; i < enemies.Count; i++)
         {
-            float distance = Vector3.Distance(transform.position, enemies[i].transform.position);
+            if (enemies[i] == null || !enemies[i].activeInHierarchy) continue;
 
-            if (distance < closesDistance) 
+            float distance = Vector2.Distance(transform.position, enemies[i].transform.position);
+
+            if (distance < closestDistance)
             {
-                closesDistance = distance;
+                closestDistance = distance;
                 target = enemies[i].transform;
             }
         }
-    }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, range);
     }
 
     private void Shoot()
     {
-        Bullet bullet = GetBulletPool().getBullet(transform.position);
+        BulletPool poolToUse = GetBulletPool();
+
+        Bullet bullet = poolToUse.getBullet(transform.position);
 
         if (bullet != null)
         {
             bullet.Launch(target, GetDamage());
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySound(AudioManager.Instance.shootSound);
+            }
         }
     }
 
     private float GetFireRate()
     {
-        if (hero == null)
-        {
-            return fireRate;
-        }
-
+        if (hero == null) return fireRate;
         return hero.ModifyFireRate(fireRate);
     }
 
     private int GetDamage()
     {
-        if (hero == null)
-        {
-            return damage;
-        }
-
+        if (hero == null) return damage;
         return hero.ModifyDamage(damage);
     }
 
@@ -92,9 +91,15 @@ public class Turret : MonoBehaviour
     {
         if (hero == null)
         {
-            return bulletPool;
+            return BulletPool.Instance;
         }
 
-        return hero.ModifyBulletPool(bulletPool);
+        return hero.ModifyBulletPool(BulletPool.Instance);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }

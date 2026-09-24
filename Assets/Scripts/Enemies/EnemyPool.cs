@@ -1,40 +1,62 @@
-using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.Pool;
 
 public class EnemyPool : MonoBehaviour
 {
-    [SerializeField] GameObject enemyPrefab;
-    [SerializeField] int poolSize = 10;
-    [SerializeField] waypointManager waypointManager;
+    public static EnemyPool Instance; // Referencia global
 
+    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private int poolSize = 10;
+    [SerializeField] private waypointManager waypointManager;
 
     private List<GameObject> activeEnemies = new List<GameObject>();
     private List<GameObject> pool = new List<GameObject>();
 
     private void Awake()
     {
-        for (int i = 0; i < poolSize; i++) 
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        for (int i = 0; i < poolSize; i++)
         {
             GameObject enemy = Instantiate(enemyPrefab);
-            enemy.GetComponent<EnemyWalker>().waypointManager = waypointManager;
+
+            if (enemy.TryGetComponent<EnemyWalker>(out EnemyWalker walker))
+            {
+                walker.waypointManager = waypointManager;
+            }
+
             enemy.SetActive(false);
             pool.Add(enemy);
-            enemy.GetComponent<EnemyHealth>().SetPool(this);
+
+            if (enemy.TryGetComponent<EnemyHealth>(out EnemyHealth health))
+            {
+                health.SetPool(this);
+            }
         }
     }
 
-
     public GameObject GetEnemy()
     {
-        for (int i = 0;i < poolSize; i++)
+        for (int i = 0; i < pool.Count; i++)
         {
-            if (pool[i].activeInHierarchy == false)
+            if (!pool[i].activeInHierarchy)
             {
                 pool[i].transform.position = waypointManager.GetWayPoint(0).position;
                 pool[i].SetActive(true);
-                activeEnemies.Add(pool[i]);
+
+                if (!activeEnemies.Contains(pool[i]))
+                {
+                    activeEnemies.Add(pool[i]);
+                }
+
                 return pool[i];
             }
         }
@@ -44,7 +66,11 @@ public class EnemyPool : MonoBehaviour
 
     public void ReturnEnemy(GameObject enemy)
     {
-        activeEnemies.Remove(enemy);
+        if (activeEnemies.Contains(enemy))
+        {
+            activeEnemies.Remove(enemy);
+        }
+
         enemy.SetActive(false);
     }
 

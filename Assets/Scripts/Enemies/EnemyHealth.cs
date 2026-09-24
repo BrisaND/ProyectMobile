@@ -16,6 +16,7 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth -= damage;
         UpdateHealthBar();
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySound(AudioManager.Instance.hitSound);
 
         if (currentHealth <= 0)
         {

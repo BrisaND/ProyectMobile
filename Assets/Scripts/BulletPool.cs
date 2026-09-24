@@ -1,40 +1,52 @@
-using NUnit.Framework;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class BulletPool : MonoBehaviour
 {
+    public static BulletPool Instance;
 
+    [SerializeField] private Bullet bulletPrefab;
+    [SerializeField] private int poolSize = 20;
 
-    [SerializeField] GameObject bulletPrefa;
-    [SerializeField] int poolSize = 50;
+    private List<Bullet> pool = new List<Bullet>();
 
-    List<GameObject> pool = new List<GameObject>();
-
-   
-    private void Awake()
+    protected virtual void Awake()
     {
-        for (int i = 0; i < poolSize; i++) 
-        {  
-            GameObject bullet = Instantiate(bulletPrefa);
-            bullet.SetActive(false);
-            pool.Add(bullet);        
+        if (Instance == null)
+        {
+            Instance = this;
         }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        InicializarPool();
     }
 
-    public Bullet getBullet(Vector3 position)
+    protected void InicializarPool()
     {
         for (int i = 0; i < poolSize; i++)
         {
-            if (pool[i].activeInHierarchy == false)
+            Bullet bullet = Instantiate(bulletPrefab);
+            bullet.gameObject.SetActive(false);
+            pool.Add(bullet);
+        }
+    }
+
+    public virtual Bullet getBullet(Vector3 position)
+    {
+        for (int i = 0; i < pool.Count; i++)
+        {
+            if (!pool[i].gameObject.activeInHierarchy)
             {
                 pool[i].transform.position = position;
-                pool[i].SetActive(true);
-                return pool[i].GetComponent<Bullet>();
+                pool[i].gameObject.SetActive(true);
+                return pool[i];
             }
         }
 
         return null;
-
     }
 }
