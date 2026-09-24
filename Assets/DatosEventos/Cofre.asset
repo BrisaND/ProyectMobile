@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a0011fd1a3bb7c4fb560a1f5e5870dc, type: 3}
+  m_Name: Cofre
+  m_EditorClassIdentifier: 
+  texto: '{heroe} encontro un cofre.'
+  opciones:
+  - texto: Romperlo
+    stat: 0
+    dificultad: 4
+    resultadoExito: Lo revienta de una patada. Un item se rompe, se lleva los otros
+      dos.
+    resultadoFallo: La tapa no cede y se lastima la mano. No consigue nada.
+  - texto: Abrirlo con cuidado
+    stat: 1
+    dificultad: 6
+    resultadoExito: Lo abre sin marcarlo. Se lleva todo.
+    resultadoFallo: Salta una trampa. No consigue nada.
+  - texto: "Revisar que no sea un m\xEDmico"
+    stat: 3
+    dificultad: 5
+    resultadoExito: No lo era. Lo abre tranquilo y se lleva todo.
+    resultadoFallo: "Era un m\xEDmico. Sale corriendo con las manos vac\xEDas."
