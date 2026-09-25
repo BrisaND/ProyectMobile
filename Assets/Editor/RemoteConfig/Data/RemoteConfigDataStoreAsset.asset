@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
+  m_Name: RemoteConfigDataStoreAsset
+  m_EditorClassIdentifier: 
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"43e65adb-0c62-4f19-a3fc-b7d61a933f51\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"puerta_vida_maxima\",\r\n      \"type\":
+    \"int\",\r\n      \"value\": 100\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"eb291177-09bb-4a7a-a551-111ff6b3a5d4\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"puerta_danio_por_enemigo\",\r\n      \"type\":
+    \"int\",\r\n      \"value\": 5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
+    \"entityId\": \"369db38a-13bb-4acf-909f-84db2cefccac\"\r\n    },\r\n    \"rs\":
+    {\r\n      \"key\": \"torre_danio_base\",\r\n      \"type\": \"int\",\r\n     
+    \"value\": 34\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"c08f66d0-ba8b-4eb0-8a54-048556c5d2a9\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"torre_alcance\",\r\n      \"type\": \"float\",\r\n      \"value\":
+    15.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"16884d03-d3cd-4ba3-8d7c-6fc054cb2dd9\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"enemigo_velocidad\",\r\n      \"type\":
+    \"float\",\r\n      \"value\": 2.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"1c2ceb55-296b-4864-8725-7b8dca1d9f5e\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"oleada_cantidad_caminantes\",\r\n      \"type\":
+    \"int\",\r\n      \"value\": 5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
+    \"entityId\": \"bff121d0-9a23-4801-a917-61cb6c973664\"\r\n    },\r\n    \"rs\":
+    {\r\n      \"key\": \"oleada_intervalo_spawn\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 1.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"a23a1e1e-aaa1-47bb-8c52-5bc3626254f2\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"expedicion_eventos_max\",\r\n      \"type\": \"int\",\r\n      \"value\":
+    4\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"33ee435d-19c1-4e17-880f-0f9fb040aec3\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"mostrar_porcentaje_checks\",\r\n     
+    \"type\": \"bool\",\r\n      \"value\": true\r\n    }\r\n  }\r\n]"
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"43e65adb-0c62-4f19-a3fc-b7d61a933f51\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"puerta_vida_maxima\",\r\n      \"type\":
+    \"int\",\r\n      \"value\": 100\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"eb291177-09bb-4a7a-a551-111ff6b3a5d4\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"puerta_danio_por_enemigo\",\r\n      \"type\":
+    \"int\",\r\n      \"value\": 5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
+    \"entityId\": \"369db38a-13bb-4acf-909f-84db2cefccac\"\r\n    },\r\n    \"rs\":
+    {\r\n      \"key\": \"torre_danio_base\",\r\n      \"type\": \"int\",\r\n     
+    \"value\": 34\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"c08f66d0-ba8b-4eb0-8a54-048556c5d2a9\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"torre_alcance\",\r\n      \"type\": \"float\",\r\n      \"value\":
+    15.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"16884d03-d3cd-4ba3-8d7c-6fc054cb2dd9\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"enemigo_velocidad\",\r\n      \"type\":
+    \"float\",\r\n      \"value\": 2.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"1c2ceb55-296b-4864-8725-7b8dca1d9f5e\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"oleada_cantidad_caminantes\",\r\n      \"type\":
+    \"int\",\r\n      \"value\": 5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
+    \"entityId\": \"bff121d0-9a23-4801-a917-61cb6c973664\"\r\n    },\r\n    \"rs\":
+    {\r\n      \"key\": \"oleada_intervalo_spawn\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 1.5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"a23a1e1e-aaa1-47bb-8c52-5bc3626254f2\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"expedicion_eventos_max\",\r\n      \"type\": \"int\",\r\n      \"value\":
+    4\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"33ee435d-19c1-4e17-880f-0f9fb040aec3\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"mostrar_porcentaje_checks\",\r\n     
+    \"type\": \"bool\",\r\n      \"value\": true\r\n    }\r\n  }\r\n]"
+  _environments: "[\r\n  {\r\n    \"projectId\": \"28ef0f2d-bdc1-4310-baf0-aaf8960c67ba\",\r\n   
+    \"name\": \"production\",\r\n    \"id\": \"a4f32637-bf13-45e1-b63b-f34cca742e10\",\r\n   
+    \"isDefault\": true,\r\n    \"createdAt\": \"2026-09-25T04:45:14Z\",\r\n    \"updatedAt\":
+    \"2026-09-25T04:45:14Z\"\r\n  }\r\n]"

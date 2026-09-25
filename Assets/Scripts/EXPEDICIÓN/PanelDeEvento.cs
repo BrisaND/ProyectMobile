@@ -3,15 +3,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Corre una expedicion completa: sortea 2 a 4 eventos, y en cada uno
-// sortea que heroe del grupo lo enfrenta.
 public class PanelDeEvento : MonoBehaviour
 {
     [Header("Datos de prueba")]
     [SerializeField] List<HeroeData> grupo = new List<HeroeData>();
     [SerializeField] List<EventoData> eventosPosibles = new List<EventoData>();
     [SerializeField] int minEventos = 2;
+
+    [Header("Valores por defecto (los pisa Remote Config si esta disponible)")]
     [SerializeField] int maxEventos = 4;
+    [SerializeField] bool mostrarPorcentaje = true;
 
     [Header("UI")]
     [SerializeField] TMP_Text textoEvento;
@@ -26,15 +27,32 @@ public class PanelDeEvento : MonoBehaviour
     private EventoData eventoActual;
     private List<Button> botonesActivos = new List<Button>();
 
+    private void OnEnable()
+    {
+        EventManager.Subscribe(GameEvents.RemoteConfigReady, AplicarConfig);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(GameEvents.RemoteConfigReady, AplicarConfig);
+    }
+
+    private void AplicarConfig()
+    {
+        maxEventos = RemoteConfigManager.GetInt(RemoteConfigKeys.ExpedicionEventosMax, maxEventos);
+        mostrarPorcentaje = RemoteConfigManager.GetBool(RemoteConfigKeys.MostrarPorcentajeChecks, mostrarPorcentaje);
+    }
+
     private void Start()
     {
+        AplicarConfig();
+
         textoEvento.text = "La expedicion esta lista para salir.";
         textoResultado.text = "";
         botonSiguiente.gameObject.SetActive(false);
         botonIniciar.gameObject.SetActive(true);
     }
 
-    // Conectar al boton Iniciar desde el inspector.
     public void IniciarExpedicion()
     {
         if (grupo.Count == 0 || eventosPosibles.Count == 0)
@@ -43,12 +61,11 @@ public class PanelDeEvento : MonoBehaviour
             return;
         }
 
-        eventosRestantes = Random.Range(minEventos, maxEventos + 1);
+        eventosRestantes = Random.Range(minEventos, Mathf.Max(minEventos, maxEventos) + 1);
         botonIniciar.gameObject.SetActive(false);
         MostrarSiguienteEvento();
     }
 
-    // Conectar al boton Siguiente desde el inspector.
     public void MostrarSiguienteEvento()
     {
         LimpiarOpciones();
@@ -64,14 +81,11 @@ public class PanelDeEvento : MonoBehaviour
 
         eventosRestantes--;
 
-        // El heroe lo sortea el juego, no lo elige el jugador.
         heroeActual = grupo[Random.Range(0, grupo.Count)];
         eventoActual = eventosPosibles[Random.Range(0, eventosPosibles.Count)];
 
         textoEvento.text = PonerNombre(eventoActual.texto);
 
-        // Evento sin opciones: es solo narrativo. No hay decision ni dado.
-        // Se muestra el texto y el jugador sigue de largo.
         if (eventoActual.opciones.Count == 0)
         {
             botonSiguiente.gameObject.SetActive(true);
@@ -84,8 +98,6 @@ public class PanelDeEvento : MonoBehaviour
         }
     }
 
-    // Reemplaza {heroe} por el nombre del heroe sorteado.
-    // Sirve para el texto del evento, para los resultados y para los botones.
     private string PonerNombre(string texto)
     {
         if (heroeActual == null || string.IsNullOrEmpty(texto))
@@ -107,11 +119,16 @@ public class PanelDeEvento : MonoBehaviour
         {
             texto.text = PonerNombre(opcion.texto);
         }
-        else
+        else if (mostrarPorcentaje)
         {
             int stat = heroeActual.GetStat(opcion.stat);
             texto.text = PonerNombre(opcion.texto) + "\n<size=70%>" + opcion.stat + " " + stat
                        + "   -   " + Mathf.RoundToInt(probabilidad * 100) + "%</size>";
+        }
+        else
+        {
+            // Modo a ciegas: se ve que stat se prueba, pero no la probabilidad.
+            texto.text = PonerNombre(opcion.texto) + "\n<size=70%>" + opcion.stat + "</size>";
         }
 
         boton.onClick.AddListener(delegate { Resolver(opcion, probabilidad); });

@@ -1,81 +1,51 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class EnemyPool : MonoBehaviour
+// Pool generico de UN tipo de enemigo.
+// Ya no es MonoBehaviour: es una clase comun que el Factory crea y administra.
+// Su unica responsabilidad es reciclar objetos (la S de SOLID).
+public class EnemyPool
 {
-    public static EnemyPool Instance; // Referencia global
+    private readonly GameObject prefab;
+    private readonly List<GameObject> objetos = new List<GameObject>();
+    private readonly Transform contenedor;
 
-    [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private int poolSize = 10;
-    [SerializeField] private waypointManager waypointManager;
-
-    private List<GameObject> activeEnemies = new List<GameObject>();
-    private List<GameObject> pool = new List<GameObject>();
-
-    private void Awake()
+    public EnemyPool(GameObject prefab, int tamaño, Transform contenedor)
     {
-        if (Instance == null)
+        this.prefab = prefab;
+        this.contenedor = contenedor;
+
+        for (int i = 0; i < tamaño; i++)
         {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        for (int i = 0; i < poolSize; i++)
-        {
-            GameObject enemy = Instantiate(enemyPrefab);
-
-            if (enemy.TryGetComponent<EnemyWalker>(out EnemyWalker walker))
-            {
-                walker.waypointManager = waypointManager;
-            }
-
-            enemy.SetActive(false);
-            pool.Add(enemy);
-
-            if (enemy.TryGetComponent<EnemyHealth>(out EnemyHealth health))
-            {
-                health.SetPool(this);
-            }
+            Crear();
         }
     }
 
-    public GameObject GetEnemy()
+    private GameObject Crear()
     {
-        for (int i = 0; i < pool.Count; i++)
+        GameObject go = Object.Instantiate(prefab, contenedor);
+        go.SetActive(false);
+        objetos.Add(go);
+        return go;
+    }
+
+    public GameObject Obtener()
+    {
+        for (int i = 0; i < objetos.Count; i++)
         {
-            if (!pool[i].activeInHierarchy)
+            if (!objetos[i].activeInHierarchy)
             {
-                pool[i].transform.position = waypointManager.GetWayPoint(0).position;
-                pool[i].SetActive(true);
-
-                if (!activeEnemies.Contains(pool[i]))
-                {
-                    activeEnemies.Add(pool[i]);
-                }
-
-                return pool[i];
+                return objetos[i];
             }
         }
 
-        return null;
+        // Si se acabaron, el pool crece en vez de devolver null.
+        // Asi un divisor que escupe 5 chiquitos nunca se queda sin cupo.
+        return Crear();
     }
 
-    public void ReturnEnemy(GameObject enemy)
+    public bool Contiene(GameObject go)
     {
-        if (activeEnemies.Contains(enemy))
-        {
-            activeEnemies.Remove(enemy);
-        }
-
-        enemy.SetActive(false);
-    }
-
-    public List<GameObject> GetActiveEnemies()
-    {
-        return activeEnemies;
+        return objetos.Contains(go);
     }
 }
