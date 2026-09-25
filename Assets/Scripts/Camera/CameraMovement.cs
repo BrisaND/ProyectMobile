@@ -16,7 +16,7 @@ public class CameraMovement : MonoBehaviour
     private Vector3 targetPosition;
     private Vector3 lastMousePosition;
     
-    // Bandera para bloquear la cámara si el gesto empezó sobre UI o sobre un aliado
+    // flag para bloquear la cámara si el gesto empezó sobre UI o sobre un aliado
     private bool isDraggingCamera = false;
     private bool touchStartedOnUI = false;
 

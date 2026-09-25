@@ -58,14 +58,12 @@ public class Turret : MonoBehaviour
         range = RemoteConfigManager.GetFloat(RemoteConfigKeys.TorreAlcance, range);
     }
 
-    // La llama el enemigo desactivador. La torre no sabe quien la apago
-    // ni por que: solo recibe cuantos segundos tiene que quedarse quieta.
+    // La llama el enemigo desactivador. La torre no sabe quien la apago ni por que: solo recibe cuantos segundos tiene que quedarse quieta.
     public void Apagar(float segundos)
     {
         if (segundos <= 0f) return;
 
-        // Si ya estaba apagada, se queda con el apagado mas largo
-        // en vez de acumularlos.
+        // Si ya estaba apagada, se queda con el apagado mas largo en vez de acumularlos.
         apagadaRestante = Mathf.Max(apagadaRestante, segundos);
         target = null;
 

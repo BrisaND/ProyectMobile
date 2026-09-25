@@ -1,5 +1,4 @@
-// Los 4 stats del juego. Si mas adelante agregan o cambian alguno,
-// se toca solo aca y el resto del sistema se acomoda.
+// Los 4 stats del juego. Si mas adelante agregan o cambian alguno, se toca solo aca y el resto se acomoda.
 public enum StatType
 {
     Fuerza,

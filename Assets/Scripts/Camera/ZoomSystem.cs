@@ -54,12 +54,12 @@ public class ZoomSystem : MonoBehaviour
 
             if (zoom != 0)
             {
-                // Restamos para ajustar la visión y aplicamos el clamp de límites 
+                // restamos para ajustar la visión y aplicamos el clamp de límites 
                 targetZoom -= zoom * zoomSpeedMobile;
                 targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoomThreshold);
             }
         }
-        // --- CONTROL DE MOUSE 
+        // CONTROL DE MOUSE 
         else
         {
             if (isTouching)

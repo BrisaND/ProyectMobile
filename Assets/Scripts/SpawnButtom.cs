@@ -16,8 +16,7 @@ public class SpawnButtom : MonoBehaviour
 
         GameObject enemigo = EnemyFactory.Instance.Crear(tipo);
 
-        // Avisamos igual que el WaveSpawner, asi el contador del GameManager
-        // no se desincroniza al usar el boton de prueba.
+        // Avisamos igual que el WaveSpawner, asi el contador del GameManage no se desincroniza al usar el boton de prueba.
         if (enemigo != null)
         {
             EventManager.TriggerEvent(GameEvents.EnemySpawned);

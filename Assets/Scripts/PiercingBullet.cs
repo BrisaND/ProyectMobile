@@ -2,8 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Bala penetrante: vuela recto y atraviesa todo lo que encuentra.
-// Como no persigue al objetivo, apunta a donde el enemigo VA A ESTAR
-// y no a donde esta. Asi le pega sin corregir el rumbo en el aire.
+// Como no persigue al objetivo, apunta a donde el enemigo VA A ESTAR y no a donde esta. Asi le pega sin corregir el rumbo en el aire.
 public class PiercingBullet : Bullet
 {
     [SerializeField] float MaxDistance = 30;

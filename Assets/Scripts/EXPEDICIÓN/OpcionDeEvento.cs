@@ -1,7 +1,6 @@
 using UnityEngine;
 
 // Una de las opciones que el jugador puede elegir dentro de un evento.
-// No es un ScriptableObject aparte: vive dentro del EventoData.
 [System.Serializable]
 public class OpcionDeEvento
 {

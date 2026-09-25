@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Bala de area. Al llegar reparte daño a todo lo que este dentro del radio,
-// salvo que haya un absorbente: en ese caso el absorbente se lo come todo.
+// Bala de area. Al llegar reparte daño a todo lo que este dentro del radio, salvo que haya un absorbente: en ese caso el absorbente se lo come todo.
 public class ExplosiveBullet : Bullet
 {
     [Header("Explosion")]
@@ -36,8 +35,7 @@ public class ExplosiveBullet : Bullet
         float distanciaAlAbsorbente = float.MaxValue;
         int dañoTotal = 0;
 
-        // Primera pasada: calcular cuanto le tocaria a cada uno
-        // y ver si hay un absorbente en el radio.
+        // Primera pasada: calcular cuanto le tocaria a cada uno y ver si hay un absorbente en el radio.
         for (int i = 0; i < tocados.Length; i++)
         {
             if (!tocados[i].TryGetComponent<EnemyHealth>(out EnemyHealth enemy))

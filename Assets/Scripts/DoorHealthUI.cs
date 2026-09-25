@@ -2,9 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Muestra la vida de la puerta. No conoce a la puerta: solo escucha el evento.
-// Es el ejemplo mas simple de por que sirve el Observer: podes agregar
-// cuantos oyentes quieras sin tocar Door.cs ni una linea.
+// Muestra la vida de la puerta. No conoce a la puerta: solo escucha el evento
+// Es el ejemplo mas simple de por que sirve el Observer: podes agregar cuantos oyentes quieras sin tocar el script de Door
 public class DoorHealthUI : MonoBehaviour
 {
     [SerializeField] private Door puerta;
@@ -17,8 +16,7 @@ public class DoorHealthUI : MonoBehaviour
         EventManager.Subscribe(GameEvents.DoorDestroyed, EnCero);
     }
 
-    // Desuscribirse SIEMPRE. EventManager es static: si no lo haces,
-    // al recargar la escena quedan oyentes muertos apuntando a objetos destruidos.
+    // Desuscribirse SIEMPRE. EventManager es static: si no lo haces,al recargar la escena quedan oyentes muertos apuntando a objetos destruidos.
     private void OnDisable()
     {
         EventManager.Unsubscribe<int>(GameEvents.DoorDamaged, Actualizar);

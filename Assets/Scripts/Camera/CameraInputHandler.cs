@@ -16,14 +16,14 @@ public class CameraInputHandler : MonoBehaviour
 
     private void Update()
     {
-        // --- CONTROL MULTITÁCTIL (MOBILE) ---
+        // tactil
         if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
 
             if (touch.phase == TouchPhase.Moved)
             {
-                // Disparamos el desplazamiento del dedo
+                // disparamos el desplazamiento del dedo
                 OnPanDelta?.Invoke(touch.deltaPosition);
             }
 
@@ -49,7 +49,7 @@ public class CameraInputHandler : MonoBehaviour
 
             OnZoomDelta?.Invoke(difference * zoomSpeedMobile);
         }
-        // --- CONTROL DE MOUSE (PC / EDITOR) ---
+        // control pc 
         else
         {
             if (isTouching && Input.touchCount == 0)
@@ -58,7 +58,7 @@ public class CameraInputHandler : MonoBehaviour
                 OnInputReleased?.Invoke();
             }
 
-            // Click primario o secundario para arrastrar en PC
+            // Click derecho o izq para arrastrar en PC
             if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
             {
                 lastMousePosition = Input.mousePosition;

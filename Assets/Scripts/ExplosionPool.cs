@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Pool de los circulos de explosion. Misma idea que BulletPool:
-// no se instancia nada en pleno combate.
+// Pool de los circulos de explosion. Misma idea que BulletPool: no se instancia nada en pleno combate.
 public class ExplosionPool : MonoBehaviour
 {
     public static ExplosionPool Instance;

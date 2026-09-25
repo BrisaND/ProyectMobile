@@ -1,8 +1,7 @@
 using UnityEngine;
 
 // Un heroe de prueba. Por ahora los stats se cargan a mano en el asset.
-// Cuando exista el equipamiento, este script va a sumar
-// los bonus de los 4 slots ademas del valor base.
+// Cuando exista el equipamiento, este script va a sumar los bonus de los 4 slots ademas del valor base.
 [CreateAssetMenu(fileName = "Heroe", menuName = "Expedicion/Heroe")]
 public class HeroeData : ScriptableObject
 {

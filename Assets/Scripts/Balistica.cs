@@ -4,11 +4,6 @@ using UnityEngine;
 // que vuela recto a velocidad fija intercepte a algo que se mueve.
 public static class Balistica
 {
-    // Resuelve |objetivo + v*t - origen| = velocidadBala * t
-    // Desarrollado queda una cuadratica en t:
-    //   (v·v - s²)t² + 2(v·d)t + d·d = 0     con d = objetivo - origen
-    // Nos quedamos con el t positivo mas chico: el primer momento en que
-    // la bala y el enemigo pueden estar en el mismo lugar.
     public static Vector3 PuntoDeIntercepcion(Vector3 origen, Vector3 objetivo, Vector3 velocidadObjetivo, float velocidadBala)
     {
         Vector3 d = objetivo - origen;
@@ -36,8 +31,7 @@ public static class Balistica
 
             if (discriminante < 0f)
             {
-                // No hay intercepcion posible: el enemigo es mas rapido
-                // y se escapa. Apuntamos directo y que sea lo que Dios quiera.
+                // No hay intercepcion posible, el enemigo es mas rapido y se escapa. Apuntamos directo y que sea lo que Dios quiera.
                 return objetivo;
             }
 

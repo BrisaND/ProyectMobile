@@ -1,13 +1,13 @@
 using UnityEngine;
 
-// Toda la matematica de los checks vive aca y en ningun otro lado.
-// Cuando decidan el rango definitivo de stats, se toca solo este archivo.
+// Toda la matematica de los checks vive aca
+// Cuando decidan el rango definitivo de stats, se toca solo este archivo
 public static class ResolutorDeEventos
 {
     // PROVISORIO. Con estos valores:
-    //   stat igual a la dificultad -> 50%
-    //   cada punto de diferencia   -> 10% para un lado o para el otro
-    // Nunca 0% ni 100%: siempre queda lugar para la sorpresa.
+    //   stat igual a la dificultad = 50%
+    //   cada punto de diferencia   = 10% para un lado o para el otro
+    // Nunca 0% ni 100%
     const float ProbabilidadBase = 0.5f;
     const float PasoPorPunto = 0.1f;
     const float ProbabilidadMinima = 0.05f;
