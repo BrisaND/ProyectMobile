@@ -1178,6 +1178,9 @@ GameObject:
   - component: {fileID: 481867023}
   - component: {fileID: 481867022}
   - component: {fileID: 481867025}
+  - component: {fileID: 481867027}
+  - component: {fileID: 481867026}
+  - component: {fileID: 481867028}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1303,6 +1306,55 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &481867026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481867021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac7e349b1caee614f8e0323664792652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomSpeedMobile: 0.05
+  zoomSpeedMouse: 5
+--- !u!114 &481867027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481867021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a797932840957604085b61b5c2118e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minZoom: 3
+  maxZoomTarget: 8
+  maxZoomThreshold: 10
+  zoomSpeedMobile: 0.05
+  zoomSpeedMouse: 5
+  smoothness: 10
+  bounceSmoothness: 6
+--- !u!114 &481867028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481867021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80895737411f0bf47b86a79f0e42bb2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panSpeed: 1
+  smoothness: 10
+  minBounds: {x: -21.3, y: -13.86}
+  maxBounds: {x: 23.5, y: 11.36}
 --- !u!1 &514093767
 GameObject:
   m_ObjectHideFlags: 0

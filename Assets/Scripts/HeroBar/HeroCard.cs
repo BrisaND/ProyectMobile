@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+
 public class HeroCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     Transform originalParent;
     int originalIndex;
     Canvas canvas;
     HeroSwitcher hero;
+
     private void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
@@ -14,6 +16,9 @@ public class HeroCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        // BLOQUEAMOS LA CÁMARA MIENTRAS ARRASTRAMOS UN ELEMENTO
+        CameraBlocker.IsDraggingUI = true;
+
         originalParent = transform.parent;
         originalIndex = transform.GetSiblingIndex();
         transform.SetParent(canvas.transform);
@@ -38,5 +43,8 @@ public class HeroCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         transform.SetParent(originalParent);
         transform.SetSiblingIndex(originalIndex);
+
+        // DESBLOQUEAMOS LA CÁMARA AL SOLTAR 
+        CameraBlocker.IsDraggingUI = false;
     }
 }
