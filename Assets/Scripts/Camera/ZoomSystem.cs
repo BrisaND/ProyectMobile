@@ -59,7 +59,7 @@ public class ZoomSystem : MonoBehaviour
                 targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoomThreshold);
             }
         }
-        // --- CONTROL DE MOUSE (PC / EDITOR) Y REBOTE AL SOLTAR ---
+        // --- CONTROL DE MOUSE 
         else
         {
             if (isTouching)
